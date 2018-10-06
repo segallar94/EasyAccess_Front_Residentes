@@ -1,0 +1,22 @@
+page-home {
+
+    .initial {
+    height: 40%;
+    background-color:#4286f4;
+    }
+    
+    .initial:hover{
+        background-color: #2f60af;
+    }
+
+
+
+    ion-icon {
+        text-align: center;
+        font-size: 60px; //Preferred size here
+    }
+
+    p {
+        padding-left:5px; 
+    }
+}

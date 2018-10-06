@@ -1,0 +1,81 @@
+<!--
+  Generated template for the InviteExternalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Invitar</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-simple-wizard [(step)]="step" [showSteps]="false" (finish)="onFinish()" [finishIcon]="'done-all'" [(stepCondition)]="stepCondition">
+
+        <ion-wizard-step>
+          <ion-card class="card-wizard">
+    
+            <ion-card-content>
+              <ion-card-title>
+                Ingrese datos del invitado
+              </ion-card-title>
+              <p>
+                <ion-list inset>
+    
+                  <ion-item>
+                    <ion-label>Nombre</ion-label>
+                    <ion-input type="text" (input)="textChange($event)" [(ngModel)]="nombre"></ion-input>
+                  </ion-item>
+    
+                  <ion-item>
+                    <ion-label>Rut</ion-label>
+                    <ion-input type="text" (input)="textChange($event)" [(ngModel)]="rut"></ion-input>
+                  </ion-item>
+    
+                  <ion-item>
+                    <ion-label>Departamento</ion-label>
+                    <ion-input (input)="textChange($event)" type="text" [(ngModel)]="departamento"></ion-input>
+                  </ion-item>
+    
+                </ion-list>
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-wizard-step>
+        <ion-wizard-step>
+          <ion-card class="card-wizard">
+    
+            <ion-card-content>
+              <ion-card-title>
+                Tome una foto del invitado
+              </ion-card-title>
+              <p>
+                <button ion-button block (click)="takePic()">Tomar foto</button>
+              </p>
+            </ion-card-content>
+            <ion-card-content>
+                <ion-card-title>
+                  Ver Fotos del invitado
+                </ion-card-title>
+                <ion-slides>
+                  <ion-slide *ngFor="let foto of photos">
+                    <img [src]="foto" />
+                  </ion-slide>
+                </ion-slides>
+              </ion-card-content>
+          </ion-card>
+    
+    
+        </ion-wizard-step>
+    
+      </ion-simple-wizard>
+    
+    
+    
+      <!--servir fotos-->
+
+</ion-content>

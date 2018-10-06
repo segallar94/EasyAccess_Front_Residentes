@@ -1,0 +1,7 @@
+{
+  "name": "easyaccess",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
