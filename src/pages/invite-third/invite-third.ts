@@ -41,10 +41,9 @@ export class InviteThirdPage {
 
   onSubmit(){
     let message = {
-      title: this.descripcion,
-      body: this.comentario
+      title: "Aviso",
+      body: "Un" + this.descripcion + "viene en camino."
     }
-    this.socket.emit('message', message.title);
     this.backend.SEND_NOTIFICATION(message).then(resp=> {
       swal("Registrado", "Se envió una notificación al conserje", "success");
     }).catch(err=>{

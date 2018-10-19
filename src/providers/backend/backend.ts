@@ -58,6 +58,25 @@ export class BackendProvider {
     //   });
   }
 
+  REGISTER_SOCKET(userId){
+    return new Promise((resolve,reject) => {
+      const httpOptions = {
+        headers: new HttpHeaders({ // 1928
+        'X-AUTH-TOKEN': 'L7S9O5M4T1I' })
+      };
+      this.http.put('http://easy.backend.boldware.cl/Notification/' + userId,
+      { 
+      }, httpOptions).subscribe(
+        (data) =>{
+         
+          resolve(data)
+        },
+        (error) =>{
+          reject(error)
+        }
+      );
+    });
+  }
 
   SEND_NOTIFICATION(params){
     return new Promise((resolve, reject) => {

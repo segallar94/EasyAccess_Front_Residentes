@@ -30,6 +30,30 @@ export class HomePage {
     public backend: BackendProvider,
     public http: HttpClient, 
     private localNotifications: LocalNotifications) {
+      this.backend.REGISTER_SOCKET('1928').then((data) => {
+        console.log(data['url']);
+        var socket = io.connect(data['url']);
+        socket.on('connect', function() {
+        socket.emit('register', data['userId'], data['connectionId']);
+        console.log("registrado");
+        socket.on('message', function(msg) {
+          console.log(msg['title']);
+          console.log(msg['body']);
+          console.log(msg);
+          //handle your message
+    
+          swal(msg['title'],msg['body'],"success");
+          localNotifications.schedule({
+            id: 5,
+            title: msg['title'],
+            text: msg['body'],
+            priority: 2
+            //   sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            //   data: { secret: key }
+            });
+          });
+      });
+      })
   }
 
   ionViewDidLoad(){
