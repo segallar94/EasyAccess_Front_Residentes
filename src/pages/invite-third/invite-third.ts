@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import swal from 'sweetalert';
 import {BackendProvider} from '../../providers/backend/backend';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import * as io from 'socket.io-client';
 
 /**
  * Generated class for the InviteThirdPage page.
@@ -17,12 +18,14 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
   templateUrl: 'invite-third.html',
 })
 export class InviteThirdPage {
+  socket:any
   descripcion: string;
   comentario: string;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public backend: BackendProvider,
   private localNotifications: LocalNotifications) {
+    this.socket = io.connect('http://easy.notification.boldware.cl/api/1928/push');
   }
 
   ionViewDidLoad() {
@@ -37,16 +40,22 @@ export class InviteThirdPage {
   }
 
   onSubmit(){
-    let params = {
-      description: this.descripcion,
-      comment: this.comentario
+    let message = {
+      title: this.descripcion,
+      body: this.comentario
     }
-    this.backend.REGISTER_NEW_THIRD(params).then(resp=>{
-      swal("Registrado", "Se ha registrado el tercero", "success");
-
+    this.socket.emit('message', message.title);
+    this.backend.SEND_NOTIFICATION(message).then(resp=> {
+      swal("Registrado", "Se envió una notificación al conserje", "success");
     }).catch(err=>{
       swal("Error",err.message,"error");
     });
+    // this.backend.REGISTER_NEW_THIRD(params).then(resp=>{
+    //   swal("Registrado", "Se ha registrado el tercero", "success");
+
+    // }).catch(err=>{
+    //   swal("Error",err.message,"error");
+    // });
   }
 
 }

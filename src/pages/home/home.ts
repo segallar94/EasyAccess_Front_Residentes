@@ -35,7 +35,7 @@ export class HomePage {
   ionViewDidLoad(){
     // var socket = io.connect('http://easy.notification.boldware.cl/');
     // const httpOptions = {
-    //   headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded','connectionId': '5b3320',
+    //   headers: new HttpHeaders({'connectionId': '5b3320',
     //   'X-AUTH-TOKEN': 'L7S9O5M4T1I' })
     // };
     // this.http.put('http://easy.notification.boldware.cl/api/5b33/register',
