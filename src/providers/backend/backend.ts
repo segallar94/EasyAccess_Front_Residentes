@@ -190,34 +190,34 @@ export class BackendProvider {
 
     return new Promise((resolve, reject) => {
 
-      this.http.post("http://easy.backend.boldware.cl/Third",
-        {
+      const httpOptions = {
+        headers: new HttpHeaders({//'Content-Type': 'application/x-www-form-urlencoded'
+      })
+      };
+      let data = {
+        idUser: '5bcab25939d05d4124aef1d1',
           name: params.name,
           lastname: params.lastname,
           rut: params.rut,
           image1: params.image1,
           image2: params.image2,
           image3: params.image3
-        },
-        {
-          headers: { 'Content-Type': 'application/json' }
-        }
-
-      ).subscribe(
-        (data) => {
-          resolve({ registered: true })
-
-          console.log(data)
-        },
-        (err) => {
-          console.log(err);
-          reject(err);
-        },
-      )
-
-
-    })
-  }
+      };
+      this.http.post("http://easy.backend.boldware.cl/Third",
+        data, httpOptions
+          //headers: { 'Content-Type': 'x-www-form-urlencoded' }      
+          ).subscribe(
+            (data) => {
+              resolve({ registered: true })
+              console.log(data)
+            },
+            (err) => {
+              console.log(err);
+              reject(params.image1);
+            },  
+            )
+          })
+    }
 
   IDENTIFY_USER(params) {
 

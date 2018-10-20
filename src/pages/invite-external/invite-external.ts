@@ -147,7 +147,7 @@ export class InviteExternalPage {
        }).catch(err=>{
          
         this.loading.dismissAll();
-        swal("Good job!", err.message, "error");
+        swal("Error", err.message, "error");
        });
 
       
