@@ -277,21 +277,36 @@ export class BackendProvider {
 
   GUESTS_BY_USER() {
     
-
     return new Promise((resolve, reject) => {
 
-      this.http.get('http://easy.backend.boldware.cl/5b33bd5cc5c7741bd9e6fc21')
-        .map((res:Response) => res.json())
+      this.http.get('http://easy.backend.boldware.cl/Third/5b2e67ddcbf5f1158be8946a')
         .subscribe(
           (data) => {
-            resolve({data})
-            console.log(data)
+            console.log(data);
+            resolve({data});
           },
           (err) => {
             console.log(err);
             reject(err);
           },
         )
+    })
+  }
+
+  CHANGE_THIRD_ACCESS(idThird,val){
+
+    return new Promise((resolve, reject) => {
+      this.http.put('http://easy.backend.boldware.cl/Third/' + idThird,
+      {access: val},{}).subscribe(
+        (data) => {
+          console.log(data);
+          resolve({data});
+        },
+        (err) => {
+          console.log(err);
+          reject(err);
+        },
+      )
     })
   }
 

@@ -14,10 +14,19 @@
 
 
 <ion-content padding>
-<ion-list>
-  <ion-item *ngFor="let item of items">
-    {{item.name}}
-    {{item.lastname}}
-  </ion-item>
-</ion-list>
+  <ion-card *ngFor="let item of items">
+  <ion-card-content >
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+              {{item.name}}
+              {{item.lastname}}
+          </ion-col>
+          <ion-col>
+            <ion-toggle [(ngModel)]="item.access" (click)="update()"></ion-toggle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card-content>
+</ion-card>
 </ion-content>

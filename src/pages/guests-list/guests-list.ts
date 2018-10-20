@@ -16,17 +16,26 @@ import {BackendProvider} from '../../providers/backend/backend';
   templateUrl: 'guests-list.html',
 })
 export class GuestsListPage {
-  public items:any;
+  items:any;
+  toggle: boolean;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public backend: BackendProvider) {
+      this.backend.GUESTS_BY_USER().then(
+        data => {
+          this.items = data['data'];
+          console.log(this.items);
+        }
+      )
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuestsListPage');
-    this.items = this.backend.GUESTS_BY_USER();
   }
 
+  update(){
+    console.log(this.toggle);
+  }
 }
