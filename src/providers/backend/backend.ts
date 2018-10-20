@@ -279,7 +279,7 @@ export class BackendProvider {
     
     return new Promise((resolve, reject) => {
 
-      this.http.get('http://easy.backend.boldware.cl/Third/5b2e67ddcbf5f1158be8946a')
+      this.http.get('http://easy.backend.boldware.cl/Third/5bcab25939d05d4124aef1d1')
         .subscribe(
           (data) => {
             console.log(data);

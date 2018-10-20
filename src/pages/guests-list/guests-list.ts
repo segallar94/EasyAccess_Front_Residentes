@@ -35,7 +35,13 @@ export class GuestsListPage {
     console.log('ionViewDidLoad GuestsListPage');
   }
 
-  update(){
-    console.log(this.toggle);
+  update(id,val){
+    console.log(val);
+    this.backend.CHANGE_THIRD_ACCESS(id,val).then(
+      data => {
+        console.log(data);
+        
+      }
+    )
   }
 }

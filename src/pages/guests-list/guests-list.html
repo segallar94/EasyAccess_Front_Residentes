@@ -23,7 +23,7 @@
               {{item.lastname}}
           </ion-col>
           <ion-col>
-            <ion-toggle [(ngModel)]="item.access" (click)="update()"></ion-toggle>
+            <ion-toggle [(ngModel)]="item.access" (ionChange)="update(item._id,item.access)"></ion-toggle>
           </ion-col>
         </ion-row>
       </ion-grid>
