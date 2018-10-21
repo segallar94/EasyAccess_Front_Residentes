@@ -42,10 +42,10 @@ export class InviteThirdPage {
   onSubmit(){
     let message = {
       title: "Aviso",
-      body: "Un" + this.descripcion + "viene en camino."
+      body: "Un " + this.descripcion + "viene en camino. \n" + this.comentario + "."
     }
     this.backend.SEND_NOTIFICATION(message).then(resp=> {
-      swal("Registrado", "Se envió una notificación al conserje", "success");
+      swal("Registrado", "Se envió una notificación a conserjería.", "success");
     }).catch(err=>{
       swal("Error",err.message,"error");
     });
