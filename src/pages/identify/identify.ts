@@ -81,7 +81,7 @@ export class IdentifyPage {
       */
      
       this.photos.push(resp.toString())
-    });
+    }).catch(err=>{console.log(err)});
     /*
     let alert = this.alertCtrl.create({
       title: 'New Friend!',

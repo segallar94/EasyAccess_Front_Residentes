@@ -146,7 +146,7 @@ export class RegisterPage {
      this.storage.ready().then(() => {
       this.storage.set('image1', resp.toString());
     
-    })
+    }).catch(err=>{console.log(err)})
      
      this.photos.push(resp.toString())
       this.cam.takepicture(params).then((resp) => {
@@ -154,7 +154,7 @@ export class RegisterPage {
         this.storage.ready().then(() => {
           this.storage.set('image2', resp.toString());
         
-        })
+        }).catch(err=>{console.log(err)})
 
         this.photos.push(resp.toString())
 
@@ -163,15 +163,15 @@ export class RegisterPage {
           this.storage.ready().then(() => {
             this.storage.set('image3', resp.toString());
           
-          })
+          }).catch(err=>{console.log(err)})
           this.photos.push(resp.toString())
 
-        });
+        }).catch(err=>{console.log(err)});
 
-      });
+      }).catch(err=>{console.log(err)});
 
 
-    });
+    }).catch(err=>{console.log(err)});
     /*
     let alert = this.alertCtrl.create({
       title: 'New Friend!',

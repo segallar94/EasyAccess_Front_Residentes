@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+/*import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { InviteExternalPage } from './invite-external';
 
@@ -11,3 +11,4 @@ import { InviteExternalPage } from './invite-external';
   ],
 })
 export class InviteExternalPageModule {}
+*/

@@ -12,7 +12,6 @@ import { LoadingController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-guests-list',
   templateUrl: 'guests-list.html',
@@ -37,7 +36,7 @@ export class GuestsListPage {
           this.items = data['data'];
           console.log(this.items);
         }
-      )
+      ).catch(err=>{console.log(err)})
   }
 
   ionViewDidLoad() {
@@ -94,6 +93,6 @@ presentLoading() {
         console.log(data);
         
       }
-    )
+    ).catch(err=>{console.log(err)})
   }
 }

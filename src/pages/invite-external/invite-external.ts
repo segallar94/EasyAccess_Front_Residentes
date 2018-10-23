@@ -18,7 +18,7 @@ import { ImagehandlerProvider } from '../../providers/imagehandler/imagehandler'
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-invite-external',
   templateUrl: 'invite-external.html',
@@ -91,7 +91,7 @@ export class InviteExternalPage {
     this.storage.ready().then(() => {
       this.storage.set('image1', resp.toString());
     
-    })
+    }).catch(err=>{console.log(err)})
      
     this.photos.push(resp.toString())
       this.cam.takepicture(params).then((resp) => {
@@ -99,7 +99,7 @@ export class InviteExternalPage {
         this.storage.ready().then(() => {
           this.storage.set('image2', resp.toString());
         
-        })
+        }).catch(err=>{console.log(err)})
 
         this.photos.push(resp.toString())
 
@@ -108,15 +108,15 @@ export class InviteExternalPage {
           this.storage.ready().then(() => {
             this.storage.set('image3', resp.toString());
           
-          })
+          }).catch(err=>{console.log(err)})
           this.photos.push(resp.toString())
 
-        });
+        }).catch(err=>{console.log(err)});
 
-      });
+      }).catch(err=>{console.log(err)});
 
 
-    });
+    }).catch(err=>{console.log(err)});
 
   }
 
