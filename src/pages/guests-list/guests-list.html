@@ -14,19 +14,13 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let item of items">
-  <ion-card-content >
-    <ion-grid>
-        <ion-row>
-          <ion-col>
-              {{item.name}}
-              {{item.lastname}}
-          </ion-col>
-          <ion-col>
+ 
+      <ion-list *ngFor="let item of items">
+          <ion-item>
+            <ion-label>{{item.name +" "+item.lastname}}</ion-label>
             <ion-toggle [(ngModel)]="item.access" (ionChange)="update(item._id,item.access)"></ion-toggle>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-  </ion-card-content>
-</ion-card>
+          </ion-item>
+      </ion-list>
+
+  
 </ion-content>

@@ -250,8 +250,8 @@ export class BackendProvider {
 
     return new Promise((resolve, reject) => {
       // cambiar por la ruta correcta
-      this.http.post("http://easy.backend.boldware.cl/User",
-        {
+      this.http.post("http://easy.backend.boldware.cl/Log",
+        { userId:'1928',
           description: params.descripcion,
           comment: params.comentario
         },

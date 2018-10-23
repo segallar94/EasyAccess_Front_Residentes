@@ -53,11 +53,13 @@
               <ion-card-title>
                 Tome una foto del invitado
               </ion-card-title>
-              <p>
-                <button ion-button block (click)="takePic()">Tomar foto</button>
-              </p>
+               
+              <!-- Se puede hacer un ion-fab list para colocar la opcion de subir foto desde el telefono -->
+                      <button ion-fab center (click)="takePic()" LARGE style="margin-left:40%;">  <ion-icon name="camera"></ion-icon></button>
+                    
             </ion-card-content>
-            <ion-card-content>
+
+            <ion-card-content >
                 <ion-card-title>
                   Ver Fotos del invitado
                 </ion-card-title>

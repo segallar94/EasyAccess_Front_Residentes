@@ -13,8 +13,7 @@
 </ion-header>
 
 
-<ion-content>
-    <ion-card>
+<ion-content padding>
   <ion-item>
     <ion-label>Descripción</ion-label>
     <ion-input type="text" [(ngModel)]="descripcion"></ion-input>
@@ -26,8 +25,7 @@
   </ion-item>
       
 
-  </ion-card>
-  <div>
-      <button ion-button (click)="onSubmit();" style="text-align:center;">Registrar</button>
-    </div>
+
+<button ion-button (click)="onSubmit();"  block >Registrar</button>
+
 </ion-content>

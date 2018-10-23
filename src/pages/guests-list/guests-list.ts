@@ -28,8 +28,12 @@ export class GuestsListPage {
     public backend: BackendProvider,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController) {
+
+
+      this.initLoading();
       this.backend.GUESTS_BY_USER().then(
         data => {
+          this.loader.dismissAll();
           this.items = data['data'];
           console.log(this.items);
         }
@@ -38,6 +42,7 @@ export class GuestsListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuestsListPage');
+
   }
   presentToast(value) {
 
@@ -62,6 +67,13 @@ export class GuestsListPage {
       //console.log('Dismissed toast');
     });
     this.toast.present();
+}
+
+initLoading() {
+  this.loader = this.loadingCtrl.create({
+    content: "Cargando invitados..."
+  });
+  this.loader.present();
 }
 
 presentLoading() {
