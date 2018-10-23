@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import swal from 'sweetalert';
 import {BackendProvider} from '../../providers/backend/backend';
 import { ToastController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the GuestsListPage page.
@@ -20,11 +21,13 @@ export class GuestsListPage {
   items:any;
   toggle: boolean;
   toast: any;
+  loader: any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public backend: BackendProvider,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController) {
       this.backend.GUESTS_BY_USER().then(
         data => {
           this.items = data['data'];
@@ -60,10 +63,21 @@ export class GuestsListPage {
     });
     this.toast.present();
 }
+
+presentLoading() {
+  this.loader = this.loadingCtrl.create({
+    content: "Actualizando estado..."
+  });
+  this.loader.present();
+}
+
   update(id,val){
+
     console.log(val);
+    this.presentLoading();
     this.backend.CHANGE_THIRD_ACCESS(id,val).then(
       data => {
+        this.loader.dismissAll();
         this.presentToast(val);
         console.log(data);
         
