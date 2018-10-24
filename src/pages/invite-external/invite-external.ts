@@ -10,6 +10,8 @@ import { AlertController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import { CameraserviceProvider } from '../../providers/cameraservice/cameraservice'
 import { ImagehandlerProvider } from '../../providers/imagehandler/imagehandler'
+import {  ToastController } from 'ionic-angular';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 /**
  * Generated class for the InviteExternalPage page.
@@ -33,6 +35,8 @@ export class InviteExternalPage {
   currentStep: any;
   loading: any;
   third: boolean;
+  imageURI:any;
+  imageFileName:any;
   @ViewChild(Slides) slides: Slides;
 
   constructor(public navCtrl: NavController,
@@ -43,6 +47,8 @@ export class InviteExternalPage {
     public imageHandlerProvider: ImagehandlerProvider,
     public backend: BackendProvider,
     public storage: Storage,
+    private transfer: FileTransfer,
+    public toastCtrl: ToastController,
     public loadingController:LoadingController) {
 
           /**
@@ -91,7 +97,9 @@ export class InviteExternalPage {
     this.storage.ready().then(() => {
       this.storage.set('image1', resp.toString());
     
-    }).catch(err=>{console.log(err)})
+    }).catch((err) => {
+      console.log(err);
+    })
      
     this.photos.push(resp.toString())
       this.cam.takepicture(params).then((resp) => {
@@ -99,7 +107,9 @@ export class InviteExternalPage {
         this.storage.ready().then(() => {
           this.storage.set('image2', resp.toString());
         
-        }).catch(err=>{console.log(err)})
+        }).catch((err) => {
+          console.log(err);
+        })
 
         this.photos.push(resp.toString())
 
@@ -108,16 +118,47 @@ export class InviteExternalPage {
           this.storage.ready().then(() => {
             this.storage.set('image3', resp.toString());
           
-          }).catch(err=>{console.log(err)})
+          }).catch((err) => {
+            console.log(err);
+          })
           this.photos.push(resp.toString())
 
-        }).catch(err=>{console.log(err)});
+        }).catch((err) => {
+          console.log(err);
+        });
 
-      }).catch(err=>{console.log(err)});
+      }).catch((err) => {
+        console.log(err);
+      });
 
 
-    }).catch(err=>{console.log(err)});
+    }).catch((err) => {
+      console.log(err);
+    });
 
+  }
+
+  getPic() {
+    let params = {
+      times: 3
+    }
+    this.cam.getImage(params).then((resp) => {
+      this.photos.push(resp.toString())
+
+      this.cam.getImage(params).then((resp) => {
+        this.photos.push(resp.toString())
+
+        this.cam.getImage(params).then((resp) => {
+          this.photos.push(resp.toString())
+        }).catch((err) =>{
+          console.log(err);
+        });
+      }).catch((err) => {
+        console.log(err);
+      })
+    }).catch((err) => {
+      console.log(err);
+    })
   }
 
   onFinish() {
@@ -176,6 +217,19 @@ export class InviteExternalPage {
     }
   }
   
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+  
+    toast.present();
+  }
   public slideNext() {
     this.slides.slideNext();
   }

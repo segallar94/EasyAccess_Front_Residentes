@@ -18,6 +18,8 @@ import { ImagehandlerProvider } from '../providers/imagehandler/imagehandler';
 import { IonicStorageModule } from '@ionic/storage';
 import { BackendProvider } from '../providers/backend/backend';
 
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 import {IonSimpleWizard} from '../pages/ion-simple-wizard/ion-simple-wizard.component';
 import {IonSimpleWizardStep} from '../pages/ion-simple-wizard/ion-simple-wizard.step.component';
@@ -69,7 +71,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     Camera,
     ImagehandlerProvider,
     BackendProvider,
-    LocalNotifications
+    LocalNotifications,
+    FileTransfer,
+    File,
   ]
 })
 export class AppModule {}
