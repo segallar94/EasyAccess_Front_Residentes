@@ -251,7 +251,7 @@ export class BackendProvider {
     return new Promise((resolve, reject) => {
       // cambiar por la ruta correcta
       this.http.post("http://easy.backend.boldware.cl/Log",
-        { userId:'1928',
+        { userId:'5bcab25939d05d4124aef1d1',
           description: params.descripcion,
           comment: params.comentario
         },

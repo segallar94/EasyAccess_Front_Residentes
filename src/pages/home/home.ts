@@ -30,7 +30,7 @@ export class HomePage {
     public backend: BackendProvider,
     public http: HttpClient, 
     private localNotifications: LocalNotifications) {
-      this.backend.REGISTER_SOCKET('1928').then((data) => {
+      this.backend.REGISTER_SOCKET('5bcab25939d05d4124aef1d1').then((data) => {
         console.log(data['url']);
         var socket = io.connect(data['url']);
         socket.on('connect', function() {
