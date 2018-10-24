@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { Platform } from 'ionic-angular';
+import { Platform, ToastController } from 'ionic-angular';
 /*
   Generated class for the CameraserviceProvider provider.
 
@@ -10,8 +10,11 @@ import { Platform } from 'ionic-angular';
 */
 @Injectable()
 export class CameraserviceProvider {
+  imageURI:any;
+  imageFileName:any;
 
-  constructor(public platform: Platform, public http: HttpClient, private camera: Camera) {
+  constructor(public platform: Platform, public http: HttpClient, private camera: Camera,
+    public toastCtrl: ToastController) {
 
     console.log('Hello CameraserviceProvider Provider');
 
@@ -44,6 +47,43 @@ export class CameraserviceProvider {
           reject(err)
         })
     });
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+  
+    toast.present();
+  }
+  
+  getImage(params) {
+
+    return new Promise((resolve,reject) =>{
+      let times = params.times;
+
+      const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+      }
+
+      this.camera.getPicture(options)
+      .then((imageData) => {
+        let base64Image = "data:image/jpeg;base64," + imageData;
+        resolve(base64Image);
+      }, (err) => {
+        reject(err);
+      }).catch((err) =>{
+        reject(err);
+      });
+    })
   }
 
 }

@@ -53,6 +53,8 @@ export class HomePage {
             });
           });
       });
+      }).catch((err) => {
+        console.log(err);
       })
   }
 
