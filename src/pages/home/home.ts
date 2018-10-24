@@ -42,7 +42,13 @@ export class HomePage {
           console.log(msg);
           //handle your message
     
-          swal(msg['title'],msg['body'],"success");
+          console.log(msg['params']);
+          if(msg['params'].access==false){
+            swal("Cuidado!"," el usuario es invitado pero no tiene permitido el ingreso al edificio","warning");
+          }
+          else{
+            swal(msg['title'],msg['body'],"success");
+          }
           localNotifications.schedule({
             id: 5,
             title: msg['title'],
