@@ -70,8 +70,9 @@ export class CameraserviceProvider {
 
       const options: CameraOptions = {
         quality: 100,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+        destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        mediaType: this.camera.MediaType.PICTURE
       }
 
       this.camera.getPicture(options)
