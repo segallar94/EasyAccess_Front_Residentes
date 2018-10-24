@@ -33,13 +33,6 @@ export class InviteThirdPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InviteThirdPage');
-    this.localNotifications.schedule({
-      id: 1,
-      title: "title test",
-      text: "body test"
-      //   sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-      //   data: { secret: key }
-    });
   }
 
   initLoading() {
