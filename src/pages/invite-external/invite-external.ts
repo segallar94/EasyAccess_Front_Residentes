@@ -142,12 +142,12 @@ export class InviteExternalPage {
        this.backend.REGISTER_NEW_EXTERNAL(params).then(resp=>{
 
         this.loading.dismissAll();
-        swal("Good job!", JSON.stringify(resp), "success");
+        swal("Bien hecho!","Usuario registrado con éxito", "success");
 
        }).catch(err=>{
          
         this.loading.dismissAll();
-        swal("Error", err.message, "error");
+        swal("Hubo un error!", "El usuario no ha podido ser registrado", "error");
        });
 
       

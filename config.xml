@@ -92,4 +92,5 @@
     <allow-navigation href="http://192.168.1.86:8100" />
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
     <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
+    <allow-navigation href="http://192.168.1.88:8100" sessionid="2d5a8e58" />
 </widget>

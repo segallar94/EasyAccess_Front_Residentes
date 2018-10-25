@@ -116,12 +116,13 @@ export class RegisterPage {
        this.backend.REGISTER_NEW_USER(params).then(resp=>{
 
         this.loading.dismissAll();
-        swal("Good job!", JSON.stringify(resp), "success");
+        
+        swal("Bien hecho", "Usuario registrado con éxito", "success");
 
        }).catch(err=>{
          
         this.loading.dismissAll();
-        swal("Good job!", err.message, "error");
+        swal("Hubo un problema", "No se pudo registrar al usuario, intentelo más tarde" , "error");
        });
 
       
