@@ -11,7 +11,6 @@ import { Events } from 'ionic-angular';
 import { CameraserviceProvider } from '../../providers/cameraservice/cameraservice'
 import { ImagehandlerProvider } from '../../providers/imagehandler/imagehandler'
 import {  ToastController } from 'ionic-angular';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 /**
  * Generated class for the InviteExternalPage page.
@@ -47,7 +46,6 @@ export class InviteExternalPage {
     public imageHandlerProvider: ImagehandlerProvider,
     public backend: BackendProvider,
     public storage: Storage,
-    private transfer: FileTransfer,
     public toastCtrl: ToastController,
     public loadingController:LoadingController) {
 
