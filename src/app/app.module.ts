@@ -4,11 +4,12 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { InviteExternalPage } from '../pages/invite-external/invite-external';
 import { InviteThirdPage } from '../pages/invite-third/invite-third';
-
+import { LoginPage } from '../pages/login/login';
 
 import { CameraserviceProvider } from '../providers/cameraservice/cameraservice';
 import { Camera } from '@ionic-native/camera';
@@ -25,6 +26,7 @@ import { IdentifyPage } from '../pages/identify/identify';
 import { RegisterPage } from '../pages/register/register';
 import { GuestsListPage } from '../pages/guests-list/guests-list';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     InviteExternalPage,
     InviteThirdPage,
     GuestsListPage,
+    LoginPage
 
   ],
   imports: [
@@ -59,6 +62,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     InviteExternalPage,
     InviteThirdPage,
     GuestsListPage,
+    LoginPage
     
   ],
   providers: [
@@ -69,7 +73,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     Camera,
     ImagehandlerProvider,
     BackendProvider,
-    LocalNotifications
+    LocalNotifications,
+    AuthServiceProvider
   ]
 })
 export class AppModule {}
