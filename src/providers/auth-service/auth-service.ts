@@ -20,30 +20,32 @@ export class AuthServiceProvider {
   constructor(public http: HttpClient) {
     this.rut = "";
     this.loggedIn = false;
-    this.URL_BACKEND = 'http://easy.backend.boldware.cl/';
+    this.URL_BACKEND = 'http://easy.backend.boldware.cl';
 
     console.log('Hello AuthServiceProvider Provider');
   }
 
   login(userInfo){    
+    console.log(userInfo);
     return new Promise((resolve, reject) => {
 
-      this.http.post(this.URL_BACKEND,
+      this.http.post('http://easy.backend.boldware.cl/User/login',
         {
           rut: userInfo.rut,
           password: userInfo.password
         },
         {
-          headers: { 'Content-Type': 'application/json' }
+         // headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }
 
       )
+      
       .subscribe(
         (resp) => {
-          localStorage.setItem('token', resp['status']);
-          this.rut = userInfo.rut;
+          //localStorage.setItem('token', resp['status']);
+          console.log(resp);
           this.loggedIn = true;
-          resolve(this.loggedIn = true);
+          resolve(resp);
 
         },
         (err) => {

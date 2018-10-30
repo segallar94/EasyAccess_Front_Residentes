@@ -18,7 +18,7 @@ import swal from 'sweetalert';
 export class LoginPage {
 
   rut: string;
-  pass: string;
+  password: string;
   isLogged: boolean;
 
   constructor(public navCtrl: NavController, 
@@ -31,30 +31,23 @@ export class LoginPage {
   }
 
   login() {
-    let f = {rut: this.rut, pass: this.pass};
-    // this.auth.login(f) // USAR ESTO CUANDO HAYA RUTA
-    // .then( resp => {
-    //   if(resp == true){
-    //     this.isLogged = true;
-    //     this.navCtrl.setRoot(HomePage);
-    //   }
-    //   else{
-    //     this.isLogged = false;
-    //     swal("Error","Acceso denegado", "error");
-    //   }
-    // }
-    // ).catch(
-    //   (err) => console.log(err)
-    // )
-    if(f.pass == '123'){
-      this.isLogged = true;
-      this.navCtrl.setRoot(HomePage);
-      swal("Aviso","Uno de sus invitados no se ha presentado en 6 meses", "info");
+    let f = {rut: this.rut, password: this.password};
+    this.auth.login(f) // USAR ESTO CUANDO HAYA RUTA
+    .then( resp => {
+      console.log(resp);
+      if(resp['success'] == true){
+        this.isLogged = true;
+        this.navCtrl.setRoot(HomePage);
+        swal("Aviso","Uno de sus invitados no se ha presentado en 6 meses", "info");
+      }
     }
-    else{
-      this.isLogged = false;
-      swal("Error","Acceso denegado", "error");
-    }
+    ).catch(
+      (err) => {
+        this.isLogged = false;
+        swal("Error","Acceso denegado", "error");
+        console.log(err)
+      }
+    )
   }
 
 }
