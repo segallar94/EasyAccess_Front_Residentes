@@ -49,6 +49,7 @@ export class LoginPage {
     if(f.pass == '123'){
       this.isLogged = true;
       this.navCtrl.setRoot(HomePage);
+      swal("Aviso","Uno de sus invitados no se ha presentado en 6 meses", "info");
     }
     else{
       this.isLogged = false;
