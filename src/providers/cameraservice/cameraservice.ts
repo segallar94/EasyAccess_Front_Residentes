@@ -68,14 +68,15 @@ export class CameraserviceProvider {
     return new Promise((resolve,reject) =>{
       let times = params.times;
 
-      const options: CameraOptions = {
+      const camOptions: CameraOptions = {
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE
       }
 
-      this.camera.getPicture(options)
+      this.camera.getPicture(camOptions)
       .then((imageData) => {
         let base64Image = "data:image/jpeg;base64," + imageData;
         resolve(base64Image);
