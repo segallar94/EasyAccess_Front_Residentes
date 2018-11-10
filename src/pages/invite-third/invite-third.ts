@@ -49,7 +49,7 @@ export class InviteThirdPage {
 
     let message = {
       title: "Aviso",
-      body: "Un " + this.descripcion + "viene en camino. \n" + this.comentario + "."
+      body: "Viene " + this.descripcion + "en camino.\n Llegará en " + this.comentario + " aproximadamente."
     }
 
     this.initLoading();

@@ -30,6 +30,8 @@ import { GuestsListPage } from '../pages/guests-list/guests-list';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
+import { AppVersion } from '@ionic-native/app-version';
+
 
 @NgModule({
   declarations: [
@@ -76,7 +78,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     ImagehandlerProvider,
     BackendProvider,
     LocalNotifications,
-    AuthServiceProvider
+    AuthServiceProvider,
+    AppVersion
   ]
 })
 export class AppModule {}

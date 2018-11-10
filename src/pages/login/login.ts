@@ -24,6 +24,9 @@ export class LoginPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private auth: AuthServiceProvider) {
+      if (auth.isLoggedIn()){
+        navCtrl.setRoot(HomePage); 
+      }
   }
 
   ionViewDidLoad() {

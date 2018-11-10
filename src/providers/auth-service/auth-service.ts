@@ -14,13 +14,14 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthServiceProvider {
   rut: string;
-  loggedIn: boolean;
   URL_BACKEND: any;
+
+  private loggedIn = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
   constructor(public http: HttpClient) {
     this.rut = "";
-    this.loggedIn = false;
     this.URL_BACKEND = 'http://easy.backend.boldware.cl';
+    localStorage.setItem('loggedIn', 'false');
 
     console.log('Hello AuthServiceProvider Provider');
   }
@@ -42,7 +43,7 @@ export class AuthServiceProvider {
       
       .subscribe(
         (resp) => {
-          //localStorage.setItem('token', resp['status']);
+          localStorage.setItem('loggedIn', 'true');
           console.log(resp);
           this.loggedIn = true;
           resolve(resp);
@@ -57,13 +58,13 @@ export class AuthServiceProvider {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('loggedIn');
     this.rut = "";
     this.loggedIn = false;
   }
 
   isLoggedIn(){
-    return this.loggedIn;
+    return JSON.parse(localStorage.getItem('loggedIn')) || this.loggedIn || false;
   }
 
 }

@@ -11,6 +11,7 @@ import * as io from 'socket.io-client';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import swal from 'sweetalert';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AppVersion } from '@ionic-native/app-version';
 
 
 
@@ -24,12 +25,14 @@ export class HomePage {
   inviteExternalPage = InviteExternalPage;
   inviteThirdPage = InviteThirdPage;
   guestsListPage = GuestsListPage;
+  versionNumber
 
   
   constructor(public navCtrl: NavController,
     public backend: BackendProvider,
     public http: HttpClient, 
-    private localNotifications: LocalNotifications) {
+    private localNotifications: LocalNotifications,
+    private appVersion: AppVersion) {
       this.backend.REGISTER_SOCKET('5bcab25939d05d4124aef1d1').then((data) => {
         console.log(data['url']);
         var socket = io.connect(data['url']);
@@ -65,6 +68,20 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
+    this.appVersion.getVersionNumber().then(version => {
+      this.versionNumber = version;
+      //swal(this.versionNumber,this.versionNumber,"success");
+      this.backend.COMPARE_VERSION(this.versionNumber).then(resp => {
+        if(resp['newVersion']==true){
+          swal("Advertencia","Es necesario actualizar la aplicación.","warning");
+        }
+        else{
+         // swal("ASDF","TODO BIEN","success");
+        }
+      })
+      });
+
+    
     // var socket = io.connect('http://easy.notification.boldware.cl/');
     // const httpOptions = {
     //   headers: new HttpHeaders({'connectionId': '5b3320',

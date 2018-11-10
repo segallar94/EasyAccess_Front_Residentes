@@ -293,6 +293,32 @@ export class BackendProvider {
     })
   }
 
+  COMPARE_VERSION(params) {
+
+    return new Promise((resolve, reject) => {
+      // cambiar por la ruta correcta
+      this.http.post("http://easy.backend.boldware.cl/InitData/" + params,
+        {},
+        {
+          headers: { 'Content-Type': 'application/json' }
+        }
+
+      ).subscribe(
+        (data) => {
+          resolve(data )
+
+          console.log(data)
+        },
+        (err) => {
+          console.log(err);
+          reject(err);
+        },
+      )
+
+
+    })
+  }
+
   CHANGE_THIRD_ACCESS(idThird,val){
 
     return new Promise((resolve, reject) => {
