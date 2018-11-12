@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { CameraserviceProvider } from '../../providers/cameraservice/cameraservice'
 import { ImagehandlerProvider } from '../../providers/imagehandler/imagehandler'
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import {BackendProvider} from '../../providers/backend/backend';
 import { LoadingController } from 'ionic-angular';
 import { PhonegapLocalNotification, LocalNotificationOptions } from '@ionic-native/phonegap-local-notification';

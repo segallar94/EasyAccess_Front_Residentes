@@ -9,9 +9,11 @@ import {BackendProvider} from '../../providers/backend/backend';
 import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppVersion } from '@ionic-native/app-version';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { LoginPage } from '../login/login';
 
 
 
@@ -32,7 +34,14 @@ export class HomePage {
     public backend: BackendProvider,
     public http: HttpClient, 
     private localNotifications: LocalNotifications,
-    private appVersion: AppVersion) {
+    private appVersion: AppVersion,
+    private auth: AuthServiceProvider) {
+      console.log(auth.isLoggedIn());
+
+      if (!auth.isLoggedIn()){
+        navCtrl.setRoot(LoginPage); 
+      }
+
       this.backend.REGISTER_SOCKET('5bcab25939d05d4124aef1d1').then((data) => {
         console.log(data['url']);
         var socket = io.connect(data['url']);
@@ -73,7 +82,39 @@ export class HomePage {
       //swal(this.versionNumber,this.versionNumber,"success");
       this.backend.COMPARE_VERSION(this.versionNumber).then(resp => {
         if(resp['newVersion']==true){
-          swal("Advertencia","Es necesario actualizar la aplicación.","warning");
+         // swal("Advertencia","Es necesario actualizar la aplicación.","warning");
+          const swalWithBootstrapButtons = swal.mixin({
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: true,
+          })
+          
+          swalWithBootstrapButtons({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.value) {
+              swalWithBootstrapButtons(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            } else if (
+              // Read more about handling dismissals
+              result.dismiss === swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons(
+                'Cancelled',
+                'Your imaginary file is safe :)',
+                'error'
+              )
+            }
+          })
         }
         else{
          // swal("ASDF","TODO BIEN","success");

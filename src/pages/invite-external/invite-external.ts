@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import { Storage } from '@ionic/storage';
 import {BackendProvider} from '../../providers/backend/backend';
 import { LoadingController } from 'ionic-angular';

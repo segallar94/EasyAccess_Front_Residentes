@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 
 /*
