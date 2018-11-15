@@ -29,6 +29,7 @@ import { RegisterPage } from '../pages/register/register';
 import { GuestsListPage } from '../pages/guests-list/guests-list';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { Market } from '@ionic-native/market';
 
 import { AppVersion } from '@ionic-native/app-version';
 
@@ -79,7 +80,8 @@ import { AppVersion } from '@ionic-native/app-version';
     BackendProvider,
     LocalNotifications,
     AuthServiceProvider,
-    AppVersion
+    AppVersion,
+    Market
   ]
 })
 export class AppModule {}

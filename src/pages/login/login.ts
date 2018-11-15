@@ -42,7 +42,7 @@ export class LoginPage {
       if(resp['success'] == true){
         this.isLogged = true;
         this.navCtrl.setRoot(HomePage);
-        swal("Aviso","Uno de sus invitados no se ha presentado en 6 meses", "info");
+      //  swal("Aviso","Uno de sus invitados no se ha presentado en 6 meses", "info");
       }
     }
     ).catch(

@@ -14,6 +14,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppVersion } from '@ionic-native/app-version';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { LoginPage } from '../login/login';
+import { Market } from '@ionic-native/market';
 
 
 
@@ -35,7 +36,8 @@ export class HomePage {
     public http: HttpClient, 
     private localNotifications: LocalNotifications,
     private appVersion: AppVersion,
-    private auth: AuthServiceProvider) {
+    private auth: AuthServiceProvider,
+    private market: Market) {
       console.log(auth.isLoggedIn());
 
       if (!auth.isLoggedIn()){
@@ -90,29 +92,21 @@ export class HomePage {
           })
           
           swalWithBootstrapButtons({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Advertencia',
+            text: "Debe actualizar su aplicación",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
+            confirmButtonText: 'Actualizar',
+            cancelButtonText: 'Ok',
             reverseButtons: true
           }).then((result) => {
             if (result.value) {
-              swalWithBootstrapButtons(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
+              this.market.search('EasyAccess');
             } else if (
               // Read more about handling dismissals
               result.dismiss === swal.DismissReason.cancel
             ) {
-              swalWithBootstrapButtons(
-                'Cancelled',
-                'Your imaginary file is safe :)',
-                'error'
-              )
+              
             }
           })
         }
