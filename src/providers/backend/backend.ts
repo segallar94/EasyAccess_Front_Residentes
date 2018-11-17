@@ -94,7 +94,7 @@ export class BackendProvider {
         'message': {
           'title': params.title, 
           'body': params.body, 
-          'params': {}
+          'params': params.params
         }};
 
       console.log(data);

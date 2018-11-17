@@ -56,11 +56,70 @@ export class HomePage {
           console.log(msg);
           //handle your message
     
-          console.log(msg['params']);
+          if(msg['params'].registered==false){
+
+            const swalWithBootstrapButtons = swal.mixin({
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger',
+              buttonsStyling: true,
+            })
+            swalWithBootstrapButtons({
+              title: msg['title'],
+              text: msg['body'],
+              type: 'info',
+              imageUrl: msg['params'].photo,
+              imageWidth: 400,
+              imageHeight: 400,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              imageAlt: 'Custom image',
+              animation: false,
+              showCancelButton: true,
+              confirmButtonText: 'Sí',
+              cancelButtonText: 'No',
+              reverseButtons: true
+             }).then((result) => {
+              if (result.value) {
+                //aceptado
+                let params = {
+                  title: "Aceptado",
+                  body: "Puede ingresar al domicilio",
+                  params: {
+                    accepted: true
+                  }
+                }
+                backend.SEND_NOTIFICATION(params);
+              } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel
+              ) {
+                //rechazado
+                let params = {
+                  title: "Rechazado",
+                  body: "No puede ingresar al domicilio",
+                  params: {
+                    accepted: false
+                  }
+                }
+                backend.SEND_NOTIFICATION(params);
+              }
+            })
+
+             
+            localNotifications.schedule({
+              id: 5,
+              title: msg['title'],
+              text: msg['body'],
+              priority: 2
+              //   sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+              //   data: { secret: key }
+              });
+          }
+
           if(msg['params'].access==false){
             swal("Cuidado!"," el usuario es invitado pero no tiene permitido el ingreso al edificio","warning");
           }
-          else{
+          if(JSON.stringify(msg['params']) == '{}'){
             swal(msg['title'],msg['body'],"success");
           }
           localNotifications.schedule({
