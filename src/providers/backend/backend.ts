@@ -319,6 +319,32 @@ export class BackendProvider {
     })
   }
 
+  CHECK_THIRD_LATE() {
+
+    return new Promise((resolve, reject) => {
+      // cambiar por la ruta correcta
+      this.http.post("http://easy.backend.boldware.cl/User/LaterThird/5bcab25939d05d4124aef1d1",
+        {},
+        {
+          headers: { 'Content-Type': 'application/json' }
+        }
+
+      ).subscribe(
+        (data) => {
+          resolve(data )
+
+          console.log(data)
+        },
+        (err) => {
+          console.log(err);
+          reject(err);
+        },
+      )
+
+
+    })
+  }
+
   CHANGE_THIRD_ACCESS(idThird,val){
 
     return new Promise((resolve, reject) => {

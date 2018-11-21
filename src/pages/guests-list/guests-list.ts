@@ -44,6 +44,13 @@ export class GuestsListPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuestsListPage');
 
+    this.backend.CHECK_THIRD_LATE().then(resp => {
+      console.log(resp['list']);
+      if(resp['later'] == true){
+        swal("Aviso","Estos usuarios no han usado sus invitaciones por 6 meses o más: " + resp["list"]['0'].name, "info");
+      }
+    })
+
   }
   presentToast(value) {
 
