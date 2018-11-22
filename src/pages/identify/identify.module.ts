@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+/*import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { IdentifyPage } from './identify';
 
@@ -13,3 +13,4 @@ import { IdentifyPage } from './identify';
   entryComponents: [IdentifyPage]
 })
 export class IdentifyPageModule {}
+*/
