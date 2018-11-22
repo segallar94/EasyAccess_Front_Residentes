@@ -21,6 +21,7 @@ export class GuestsListPage {
   toggle: boolean;
   toast: any;
   loader: any;
+  userId: string;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -28,9 +29,10 @@ export class GuestsListPage {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController) {
 
+      this.userId = localStorage.getItem('userId');
 
       this.initLoading();
-      this.backend.GUESTS_BY_USER().then(
+      this.backend.GUESTS_BY_USER(this.userId).then(
         data => {
           this.loader.dismissAll();
           this.items = data['data'];
@@ -44,7 +46,7 @@ export class GuestsListPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuestsListPage');
 
-    this.backend.CHECK_THIRD_LATE().then(resp => {
+    this.backend.CHECK_THIRD_LATE(this.userId).then(resp => {
       console.log(resp['list']);
       if(resp['later'] == true){
         swal("Aviso","Estos usuarios no han usado sus invitaciones por 6 meses o más: " + resp["list"]['0'].name, "info");

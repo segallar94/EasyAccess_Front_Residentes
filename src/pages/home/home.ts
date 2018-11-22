@@ -17,7 +17,6 @@ import { LoginPage } from '../login/login';
 import { Market } from '@ionic-native/market';
 
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -28,7 +27,9 @@ export class HomePage {
   inviteExternalPage = InviteExternalPage;
   inviteThirdPage = InviteThirdPage;
   guestsListPage = GuestsListPage;
-  versionNumber
+  versionNumber;
+
+  userId: string;
 
   
   constructor(public navCtrl: NavController,
@@ -38,13 +39,17 @@ export class HomePage {
     private appVersion: AppVersion,
     private auth: AuthServiceProvider,
     private market: Market) {
+
+      this.userId = localStorage.getItem('userId');
+
       console.log(auth.isLoggedIn());
+      console.log(localStorage.getItem('userId'));
 
       if (!auth.isLoggedIn()){
         navCtrl.setRoot(LoginPage); 
       }
 
-      this.backend.REGISTER_SOCKET('5bcab25939d05d4124aef1d1').then((data) => {
+      this.backend.REGISTER_SOCKET(this.userId).then((data) => {
         console.log(data['url']);
         var socket = io.connect(data['url']);
         socket.on('connect', function() {
@@ -114,6 +119,10 @@ export class HomePage {
               //   sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
               //   data: { secret: key }
               });
+          }
+
+          if(msg['params'].access==true){
+            swal("Aviso!", " Ha llegado su invitado", "success");
           }
 
           if(msg['params'].access==false){

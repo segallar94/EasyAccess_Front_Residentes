@@ -22,13 +22,15 @@ export class InviteThirdPage {
   descripcion: string;
   comentario: string;
   loader: any;
+  userId: string;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public backend: BackendProvider,
     private localNotifications: LocalNotifications,
     public loadingCtrl: LoadingController
   ) {
-    this.socket = io.connect('http://easy.notification.boldware.cl/api/1928/push');
+    this.userId = localStorage.getItem('userId');
+    //this.socket = io.connect('http://easy.notification.boldware.cl/api/1928/push');
   }
 
   ionViewDidLoad() {
@@ -43,13 +45,15 @@ export class InviteThirdPage {
   }
   onSubmit() {
     let params = {
+      userId: this.userId,
       descripcion: this.descripcion,
       comentario: this.comentario
     }
 
     let message = {
       title: "Aviso",
-      body: "Viene " + this.descripcion + "en camino.\n Llegará en " + this.comentario + " aproximadamente."
+      body: "Viene " + this.descripcion + " en camino.\n Llegará en " + this.comentario + " aproximadamente.",
+      params: {}
     }
 
     this.initLoading();

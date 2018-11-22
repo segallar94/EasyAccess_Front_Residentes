@@ -26,7 +26,8 @@ export class LoginPage {
     private auth: AuthServiceProvider) {
       console.log(auth.isLoggedIn());
       if (auth.isLoggedIn()){
-        navCtrl.setRoot(HomePage); 
+        navCtrl.setRoot(HomePage);
+        console.log(localStorage.getItem('userId')); 
       }
   }
 
@@ -41,6 +42,7 @@ export class LoginPage {
       console.log(resp);
       if(resp['success'] == true){
         this.isLogged = true;
+        localStorage.setItem('userId', resp['id']);
         this.navCtrl.setRoot(HomePage);
       //  swal("Aviso","Uno de sus invitados no se ha presentado en 6 meses", "info");
       }

@@ -36,6 +36,7 @@ export class InviteExternalPage {
   third: boolean;
   imageURI:any;
   imageFileName:any;
+  userId: string;
   @ViewChild(Slides) slides: Slides;
 
   constructor(public navCtrl: NavController,
@@ -49,6 +50,7 @@ export class InviteExternalPage {
     public toastCtrl: ToastController,
     public loadingController:LoadingController) {
 
+      this.userId = localStorage.getItem('userId');
           /**
      * Step Wizard Settings
      */
@@ -170,12 +172,13 @@ export class InviteExternalPage {
       this.storage.set('departamento', this.departamento);
 
       let params = { 
+        userId: this.userId,
         name: this.nombre.split(' ')[0],
-          lastname: this.nombre.split(' ')[1] ,
-          rut: this.rut,
-          image1: this.photos[0],
-          image2: this.photos[1],
-          image3: this.photos[2]
+        lastname: this.nombre.split(' ')[1] ,
+        rut: this.rut,
+        image1: this.photos[0],
+        image2: this.photos[1],
+        image3: this.photos[2]
        }
 
        this.backend.REGISTER_NEW_EXTERNAL(params).then(resp=>{

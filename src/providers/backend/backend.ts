@@ -195,7 +195,7 @@ export class BackendProvider {
       })
       };
       let data = {
-        idUser: '5bcab25939d05d4124aef1d1',
+        idUser: params.userId,
           name: params.name,
           lastname: params.lastname,
           rut: params.rut,
@@ -251,7 +251,7 @@ export class BackendProvider {
     return new Promise((resolve, reject) => {
       // cambiar por la ruta correcta
       this.http.post("http://easy.backend.boldware.cl/Log",
-        { userId:'5bcab25939d05d4124aef1d1',
+        { userId: params.userId,
           description: params.descripcion,
           comment: params.comentario
         },
@@ -275,11 +275,11 @@ export class BackendProvider {
     })
   }
 
-  GUESTS_BY_USER() {
+  GUESTS_BY_USER(userId) {
     
     return new Promise((resolve, reject) => {
 
-      this.http.get('http://easy.backend.boldware.cl/Third/5bcab25939d05d4124aef1d1')
+      this.http.get('http://easy.backend.boldware.cl/Third/' + userId)
         .subscribe(
           (data) => {
             console.log(data);
@@ -319,11 +319,11 @@ export class BackendProvider {
     })
   }
 
-  CHECK_THIRD_LATE() {
+  CHECK_THIRD_LATE(userId) {
 
     return new Promise((resolve, reject) => {
       // cambiar por la ruta correcta
-      this.http.post("http://easy.backend.boldware.cl/User/LaterThird/5bcab25939d05d4124aef1d1",
+      this.http.post("http://easy.backend.boldware.cl/User/LaterThird/" + userId,
         {},
         {
           headers: { 'Content-Type': 'application/json' }
