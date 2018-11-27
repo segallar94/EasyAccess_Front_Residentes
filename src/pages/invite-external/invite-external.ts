@@ -37,6 +37,9 @@ export class InviteExternalPage {
   imageURI:any;
   imageFileName:any;
   userId: string;
+  photos: any;
+  aux: any;
+  temp: any;
   @ViewChild(Slides) slides: Slides;
 
   constructor(public navCtrl: NavController,
@@ -50,6 +53,9 @@ export class InviteExternalPage {
     public toastCtrl: ToastController,
     public loadingController:LoadingController) {
 
+      this.photos = new Array<string>();
+      this.temp = new Array<string>();
+      this.aux = new Array<string>();
       this.userId = localStorage.getItem('userId');
           /**
      * Step Wizard Settings
@@ -79,98 +85,106 @@ export class InviteExternalPage {
     console.log('ionViewDidLoad InviteExternalPage');
   }
 
-  public photos = new Array<string>();  
   takePic() {
     let params = {
       times: 3
     }
-
-    // solo por ahora se hace así 
-    this.cam.takepicture(params).then((resp) => {
-      /*let urlCreator = window.URL;
-     let dataBlob = this.imageHandlerProvider.getBlob(resp);
-      let imageUrl = urlCreator.createObjectURL(dataBlob);
+    console.log(this.photos.length);
+    if(this.photos.length>2){
       
-      */
-
-      
-    this.storage.ready().then(() => {
-      this.storage.set('image1', resp.toString());
-    
-    }).catch((err) => {
-      console.log(err);
-    })
-     
-    this.photos.push(resp.toString())
       this.cam.takepicture(params).then((resp) => {
-
-        this.storage.ready().then(() => {
-          this.storage.set('image2', resp.toString());
         
-        }).catch((err) => {
-          console.log(err);
-        })
-
+        this.photos = this.photos.slice(1,);
         this.photos.push(resp.toString())
 
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+
+    else{
+      // solo por ahora se hace así 
+      this.cam.takepicture(params).then((resp) => {
+        /*let urlCreator = window.URL;
+      let dataBlob = this.imageHandlerProvider.getBlob(resp);
+        let imageUrl = urlCreator.createObjectURL(dataBlob);
+        
+        */
+
+        
+      
+      this.photos.push(resp.toString())
         this.cam.takepicture(params).then((resp) => {
 
-          this.storage.ready().then(() => {
-            this.storage.set('image3', resp.toString());
-          
+
+          this.photos.push(resp.toString())
+
+          this.cam.takepicture(params).then((resp) => {
+
+            this.photos.push(resp.toString())
+
           }).catch((err) => {
             console.log(err);
-          })
-          this.photos.push(resp.toString())
+          });
 
         }).catch((err) => {
           console.log(err);
         });
 
+
       }).catch((err) => {
         console.log(err);
       });
-
-
-    }).catch((err) => {
-      console.log(err);
-    });
-
+    }
   }
 
   getPic() {
     let params = {
       times: 3
     }
-    this.cam.getImage(params).then((resp) => {
-      this.photos.push(resp.toString())
 
+    if(this.photos.length>2){
       this.cam.getImage(params).then((resp) => {
+
+        this.photos = this.photos.slice(1,);
         this.photos.push(resp.toString())
 
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+    else{
+      this.cam.getImage(params).then((resp) => {
+        this.photos.push(resp.toString())
+  
         this.cam.getImage(params).then((resp) => {
           this.photos.push(resp.toString())
-        }).catch((err) =>{
+  
+          this.cam.getImage(params).then((resp) => {
+            this.photos.push(resp.toString())
+          }).catch((err) =>{
+            console.log(err);
+          });
+        }).catch((err) => {
           console.log(err);
-        });
+        })
       }).catch((err) => {
         console.log(err);
       })
-    }).catch((err) => {
-      console.log(err);
-    })
+    }   
   }
 
   onFinish() {
-    this.loading = this.loadingController.create({ content: "Espere un momento..." });
-    this.loading.present();
-    // Esto se puede cambiar despues si es que no es necesario guardar estos datos en la aplicacion
-    // pero se recuperan desde el formulario para ser manejados segun necesidad
-    this.storage.ready().then(() => {
-      this.storage.set('name', this.nombre);
-      this.storage.set('rut', this.rut);
-      this.storage.set('departamento', this.departamento);
+    if(this.photos.length < 3){
+      swal("Advertencia","Necesita 3 fotos para registrar a su invitado", "warning");
+    }
 
+    else{
+      this.loading = this.loadingController.create({ content: "Espere un momento..." });
+      this.loading.present();
+      // Esto se puede cambiar despues si es que no es necesario guardar estos datos en la aplicacion
+      // pero se recuperan desde el formulario para ser manejados segun necesidad
+  
       let params = { 
         userId: this.userId,
         name: this.nombre.split(' ')[0],
@@ -179,21 +193,23 @@ export class InviteExternalPage {
         image1: this.photos[0],
         image2: this.photos[1],
         image3: this.photos[2]
-       }
-
-       this.backend.REGISTER_NEW_EXTERNAL(params).then(resp=>{
-
-        this.loading.dismissAll();
-        swal("Bien hecho!", "Se ha registrado con éxito el usuario", "success");
-
-       }).catch(err=>{
-         
-        this.loading.dismissAll();
-        swal("Hubo un problema", "No hemos podido registrar el usuario", "error");
-       });
+      }
 
       
-    }).catch((err)=>{ console.log(err)});
+
+      
+      this.backend.REGISTER_NEW_EXTERNAL(params).then(resp=>{
+        
+        this.loading.dismissAll();       
+        swal("Bien hecho!", "Se ha registrado con éxito el usuario", "success");
+  
+      }).catch(err=>{
+           
+        this.loading.dismissAll();
+        swal("Hubo un problema", "No hemos podido registrar el usuario", "error");
+      });
+      this.photos = this.aux;
+    }
   }  
 
   toggle() {
