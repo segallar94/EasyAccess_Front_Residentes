@@ -175,40 +175,46 @@ export class InviteExternalPage {
   }
 
   onFinish() {
-    if(this.photos.length < 3){
-      swal("Advertencia","Necesita 3 fotos para registrar a su invitado", "warning");
+    if (this.nombre == undefined || this.rut == undefined ){
+      swal("Error","Necesita completar los datos del invitado", "error");
     }
 
     else{
-      this.loading = this.loadingController.create({ content: "Espere un momento..." });
-      this.loading.present();
-      // Esto se puede cambiar despues si es que no es necesario guardar estos datos en la aplicacion
-      // pero se recuperan desde el formulario para ser manejados segun necesidad
-  
-      let params = { 
-        userId: this.userId,
-        name: this.nombre.split(' ')[0],
-        lastname: this.nombre.split(' ')[1] ,
-        rut: this.rut,
-        image1: this.photos[0],
-        image2: this.photos[1],
-        image3: this.photos[2]
+      if(this.photos.length < 3){
+        swal("Advertencia","Necesita 3 fotos para registrar a su invitado", "warning");
       }
-
-      
-
-      
-      this.backend.REGISTER_NEW_EXTERNAL(params).then(resp=>{
-        
-        this.loading.dismissAll();       
-        swal("Bien hecho!", "Se ha registrado con éxito el usuario", "success");
   
-      }).catch(err=>{
-           
-        this.loading.dismissAll();
-        swal("Hubo un problema", "No hemos podido registrar el usuario", "error");
-      });
-      this.photos = this.aux;
+      else{
+        this.loading = this.loadingController.create({ content: "Espere un momento..." });
+        this.loading.present();
+        // Esto se puede cambiar despues si es que no es necesario guardar estos datos en la aplicacion
+        // pero se recuperan desde el formulario para ser manejados segun necesidad
+    
+        let params = { 
+          userId: this.userId,
+          name: this.nombre.split(' ')[0],
+          lastname: this.nombre.split(' ')[1] ,
+          rut: this.rut,
+          image1: this.photos[0],
+          image2: this.photos[1],
+          image3: this.photos[2]
+        }
+  
+        
+  
+        
+        this.backend.REGISTER_NEW_EXTERNAL(params).then(resp=>{
+          
+          this.loading.dismissAll();       
+          swal("Bien hecho!", "Se ha registrado con éxito el usuario", "success");
+    
+        }).catch(err=>{
+             
+          this.loading.dismissAll();
+          swal("Hubo un problema", "No hemos podido registrar el usuario", "error");
+        });
+        this.photos = this.aux;
+      }
     }
   }  
 
