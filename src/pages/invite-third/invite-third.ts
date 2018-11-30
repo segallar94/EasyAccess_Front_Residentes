@@ -44,37 +44,43 @@ export class InviteThirdPage {
     this.loader.present();
   }
   onSubmit() {
-    let params = {
-      userId: this.userId,
-      descripcion: this.descripcion,
-      comentario: this.comentario
+
+    if(this.comentario == undefined){
+      swal("Error","Necesita proveer una descripción de la persona que viene","error");
     }
 
-    let message = {
-      title: "Aviso",
-      body: "Viene " + this.descripcion + " en camino.\n Llegará en " + this.comentario + " aproximadamente.",
-      params: {}
-    }
-
-    this.initLoading();
-    this.backend.REGISTER_NEW_THIRD(params).then(resp => {
-     
-
-      this.backend.SEND_NOTIFICATION(message).then(resp => {
-        this.loader.dismissAll();
-        swal("Registrado", "Se envió una notificación a conserjería.", "success");
-
+    else{
+      let params = {
+        userId: this.userId,
+        descripcion: this.descripcion,
+        comentario: this.comentario
+      }
+  
+      let message = {
+        title: "Aviso",
+        body: "Viene " + this.descripcion + " en camino.\n Llegará en " + this.comentario + " aproximadamente.",
+        params: {}
+      }
+  
+      this.initLoading();
+      this.backend.REGISTER_NEW_THIRD(params).then(resp => {
+       
+  
+        this.backend.SEND_NOTIFICATION(message).then(resp => {
+          this.loader.dismissAll();
+          swal("Registrado", "Se envió una notificación a conserjería.", "success");
+  
+        }).catch(err => {
+          swal("Error", err.message, "error");
+       });
       }).catch(err => {
         swal("Error", err.message, "error");
-     });
-    }).catch(err => {
-      swal("Error", err.message, "error");
-   })
-    //     //   swal("Registrado", "Se ha registrado el tercero", "success");
-
-    // }).catch(err=>{
-    //   swal("Error",err.message,"error");
-    // });
+     })
+      //     //   swal("Registrado", "Se ha registrado el tercero", "success");
+  
+      // }).catch(err=>{
+      //   swal("Error",err.message,"error");
+      // });
+    }
   }
-
 }

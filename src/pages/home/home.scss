@@ -1,7 +1,7 @@
 page-home {
 
     .initial {
-    height: 40%;
+    height: 32%;
     background-color:#4286f4;
     }
     
@@ -9,7 +9,9 @@ page-home {
         background-color: #2f60af;
     }
 
-
+    [noScroll] {
+        overflow: hidden;
+      }
 
     ion-icon {
         text-align: center;

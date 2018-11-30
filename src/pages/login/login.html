@@ -13,13 +13,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-bounce [attr.noScroll]="shouldScroll">
   <ion-card center>
     <ion-card-header>
       Datos del usuario
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
+      <ion-list inset>
         <ion-item>
           <ion-label fixed>Rut:</ion-label>
           <ion-input type="text"[(ngModel)]="rut"></ion-input>
@@ -29,7 +29,7 @@
           <ion-input type="password"[(ngModel)]="password"></ion-input>
         </ion-item>
       </ion-list>
-      <div padding>
+      <div>
         <button ion-button block (click)="login()">Login</button>
       </div>
     </ion-card-content>

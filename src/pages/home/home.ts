@@ -94,6 +94,7 @@ export class HomePage {
                   }
                 }
                 backend.SEND_NOTIFICATION(params);
+                swal("Aviso","Se ha dado aviso al conserje con éxito.","success");
               } else if (
                 // Read more about handling dismissals
                 result.dismiss === swal.DismissReason.cancel
@@ -107,6 +108,7 @@ export class HomePage {
                   }
                 }
                 backend.SEND_NOTIFICATION(params);
+                swal("Aviso","Se ha dado aviso al conserje con éxito.","success");
               }
             })
 
